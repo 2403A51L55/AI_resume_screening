@@ -1,6 +1,8 @@
-# 🤖 AI Resume Screener
+﻿# 🤖 AI Resume Screener
 
 A modern, AI-powered resume screening platform built with **React + Vite + Tailwind CSS**.
+**Deploy**
+**Github Link** - https://github.com/2403A51L55/AI_resume_screening
 
 ## ✨ Features
 
@@ -32,11 +34,6 @@ npm run dev
 
 # 5. Open browser at http://localhost:5173
 ```
-
-### Demo Login
-- **Email:** `hr@company.com`
-- **Password:** `password123`
-- *(Any email/password works — just click Sign In)*
 
 ## 🧠 How the AI Works
 
@@ -94,7 +91,3 @@ ai-resume-screener/
 npm run build
 # Output in dist/ folder — deploy to any static host
 ```
-
----
-
-*Built with ❤️ for SR University HPC Course Project Demo*
