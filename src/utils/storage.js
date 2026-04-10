@@ -25,6 +25,9 @@ export const storage = {
     const list = storage.getResumes().filter(r => r.id !== id)
     storage.setResumes(list)
   },
+  clearResumes: () => {
+    storage.setResumes([])
+  },
 
   // Job Description
   getJobDesc: ()      => JSON.parse(localStorage.getItem(KEYS.JOB_DESC) || 'null'),

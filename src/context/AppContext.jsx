@@ -54,6 +54,11 @@ export function AppProvider({ children }) {
     setResumes(storage.getResumes())
   }
 
+  const deleteAllResumes = () => {
+    storage.clearResumes()
+    setResumes([])
+  }
+
   const saveJobDesc = (data) => {
     const j = { ...data, id: `jd${Date.now()}`, createdAt: new Date().toISOString(), skills: extractSkills(data.description) }
     storage.setJobDesc(j)
@@ -81,7 +86,7 @@ export function AppProvider({ children }) {
   }
 
   return (
-    <AppContext.Provider value={{ user, login, logout, resumes, addResume, deleteResume, jobDesc, saveJobDesc, results, runScreening, loading, stats }}>
+    <AppContext.Provider value={{ user, login, logout, resumes, addResume, deleteResume, deleteAllResumes, jobDesc, saveJobDesc, results, runScreening, loading, stats }}>
       {children}
     </AppContext.Provider>
   )

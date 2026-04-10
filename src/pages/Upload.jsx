@@ -5,12 +5,25 @@ import { extractSkills } from '../utils/aiEngine'
 import SkillBadge from '../components/SkillBadge'
 
 export default function Upload() {
-  const { addResume, deleteResume, resumes } = useApp()
+  const { addResume, deleteResume, deleteAllResumes, resumes } = useApp()
   const [drag, setDrag]         = useState(false)
-  const [form, setForm]         = useState({ name: '', email: '', position: '', rawText: '' })
+  const [form, setForm]         = useState({ rawText: '' })
+  const [fileName, setFileName] = useState('')
   const [previewing, setPreviewing] = useState(false)
   const [submitted, setSubmitted]   = useState(false)
   const fileRef = useRef(null)
+
+  const handleDelete = (id) => {
+    if (window.confirm('Delete this resume? This action cannot be undone.')) {
+      deleteResume(id)
+    }
+  }
+
+  const handleDeleteAll = () => {
+    if (resumes.length > 0 && window.confirm('Delete all uploaded resumes? This cannot be undone.')) {
+      deleteAllResumes()
+    }
+  }
 
   const previewSkills = form.rawText ? extractSkills(form.rawText) : []
 
@@ -21,15 +34,23 @@ export default function Upload() {
   }
 
   const readFile = (file) => {
-    setForm(f => ({ ...f, rawText: `Skills extracted from: ${file.name}. Python React Node.js AWS Docker Kubernetes TypeScript MongoDB PostgreSQL Git CI/CD` }))
+    setFileName(file.name)
+    setForm({ rawText: `Skills extracted from: ${file.name}. Python React Node.js AWS Docker Kubernetes TypeScript MongoDB PostgreSQL Git CI/CD` })
     setPreviewing(true)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!form.name || !form.email) return
-    addResume({ ...form, skills: previewSkills, fileName: form.name + '_resume.pdf' })
-    setForm({ name: '', email: '', position: '', rawText: '' })
+    addResume({
+      ...form,
+      name: fileName || 'Candidate',
+      email: '',
+      position: '',
+      skills: previewSkills,
+      fileName: fileName ? `${fileName}_resume.pdf` : 'resume.pdf'
+    })
+    setForm({ rawText: '' })
+    setFileName('')
     setPreviewing(false)
     setSubmitted(true)
     setTimeout(() => setSubmitted(false), 3000)
@@ -72,24 +93,9 @@ export default function Upload() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="card space-y-4">
-            <p className="text-white font-semibold text-sm">Candidate Details</p>
-            <div className="grid grid-cols-2 gap-3">
-              <div>
-                <label className="block text-xs text-white/50 mb-1.5 font-medium">Full Name *</label>
-                <input className="input text-sm" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="John Doe" required />
-              </div>
-              <div>
-                <label className="block text-xs text-white/50 mb-1.5 font-medium">Email *</label>
-                <input className="input text-sm" type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="john@email.com" required />
-              </div>
-            </div>
-            <div>
-              <label className="block text-xs text-white/50 mb-1.5 font-medium">Applied Position</label>
-              <input className="input text-sm" value={form.position} onChange={e => setForm(f => ({ ...f, position: e.target.value }))} placeholder="e.g. Senior React Developer" />
-            </div>
             <div>
               <label className="block text-xs text-white/50 mb-1.5 font-medium">Paste Resume Text / Skills</label>
-              <textarea className="input text-sm resize-none h-28" value={form.rawText} onChange={e => setForm(f => ({ ...f, rawText: e.target.value }))}
+              <textarea className="input text-sm resize-none h-28" value={form.rawText} onChange={e => setForm({ rawText: e.target.value })}
                 placeholder="Paste resume text or list skills: Python, React, Node.js, AWS..." />
             </div>
             {previewSkills.length > 0 && (
@@ -101,16 +107,24 @@ export default function Upload() {
               </div>
             )}
             <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
-              <Plus size={16} /> Add Candidate
+              <Plus size={16} /> Add Resume
             </button>
           </form>
         </div>
 
         {/* Resume list */}
         <div className="card">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-white">Uploaded Resumes</h3>
-            <span className="badge bg-brand-500/15 text-brand-400 border border-brand-500/20">{resumes.length} total</span>
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <h3 className="font-semibold text-white">Uploaded Resumes</h3>
+              <span className="badge bg-brand-500/15 text-brand-400 border border-brand-500/20">{resumes.length} total</span>
+            </div>
+            {resumes.length > 0 && (
+              <button type="button" onClick={handleDeleteAll}
+                className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white transition hover:border-red-400 hover:bg-red-500/10 hover:text-red-300">
+                <Trash2 size={14} /> Delete All
+              </button>
+            )}
           </div>
           <div className="space-y-2 max-h-[460px] overflow-y-auto scrollbar-thin pr-1">
             {resumes.length === 0 ? (
@@ -138,9 +152,9 @@ export default function Upload() {
                     </div>
                   )}
                 </div>
-                <button onClick={() => deleteResume(r.id)}
-                  className="text-white/20 hover:text-red-400 transition-colors p-1 opacity-0 group-hover:opacity-100">
-                  <Trash2 size={14} />
+                <button onClick={() => handleDelete(r.id)}
+                  className="ml-auto inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white transition hover:border-red-400 hover:bg-red-500/10 hover:text-red-300">
+                  <Trash2 size={12} /> Delete
                 </button>
               </div>
             ))}
