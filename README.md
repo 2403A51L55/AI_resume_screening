@@ -1,8 +1,8 @@
 ﻿# 🤖 AI Resume Screener
 
 A modern, AI-powered resume screening platform built with **React + Vite + Tailwind CSS**.
-**Deploy**
-**Github Link** - https://github.com/2403A51L55/AI_resume_screening
+## Deploy
+**Github Link** - https://github.com/Ganeshmandala048/AI_RESUME_SCREENER
 
 ## ✨ Features
 
