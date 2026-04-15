@@ -7,14 +7,34 @@ const KEYS = {
   RESULTS:     'ars_results',
 }
 
+function safeParse(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key)
+    return raw ? JSON.parse(raw) : fallback
+  } catch {
+    localStorage.removeItem(key)
+    return fallback
+  }
+}
+
+function getArray(key) {
+  const value = safeParse(key, [])
+  return Array.isArray(value) ? value : []
+}
+
+function getObject(key) {
+  const value = safeParse(key, null)
+  return value && typeof value === 'object' && !Array.isArray(value) ? value : null
+}
+
 export const storage = {
   // Auth
-  getUser:    ()      => JSON.parse(localStorage.getItem(KEYS.USER) || 'null'),
+  getUser:    ()      => getObject(KEYS.USER),
   setUser:    (u)     => localStorage.setItem(KEYS.USER, JSON.stringify(u)),
   clearUser:  ()      => localStorage.removeItem(KEYS.USER),
 
   // Resumes
-  getResumes: ()      => JSON.parse(localStorage.getItem(KEYS.RESUMES) || '[]'),
+  getResumes: ()      => getArray(KEYS.RESUMES),
   setResumes: (rs)    => localStorage.setItem(KEYS.RESUMES, JSON.stringify(rs)),
   addResume:  (r)     => {
     const list = storage.getResumes()
@@ -30,11 +50,11 @@ export const storage = {
   },
 
   // Job Description
-  getJobDesc: ()      => JSON.parse(localStorage.getItem(KEYS.JOB_DESC) || 'null'),
+  getJobDesc: ()      => getObject(KEYS.JOB_DESC),
   setJobDesc: (j)     => localStorage.setItem(KEYS.JOB_DESC, JSON.stringify(j)),
 
   // Results
-  getResults: ()      => JSON.parse(localStorage.getItem(KEYS.RESULTS) || '[]'),
+  getResults: ()      => getArray(KEYS.RESULTS),
   setResults: (rs)    => localStorage.setItem(KEYS.RESULTS, JSON.stringify(rs)),
 
   clearAll:   ()      => Object.values(KEYS).forEach(k => localStorage.removeItem(k)),
