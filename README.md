@@ -73,17 +73,6 @@ ai-resume-screener/
 
 ---
 
-## 🧪 Run Locally
-
-```bash
-npm install
-npm run dev
-```
-
-Then open the local URL shown in the terminal.
-
----
-
 ## 📌 Notes
 
 - The app is currently designed as a frontend project with client-side state.
