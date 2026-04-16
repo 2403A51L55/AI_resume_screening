@@ -1,109 +1,131 @@
 ﻿# 🤖 AI Resume Screener
 
-A modern, AI-powered resume screening platform built with **React + Vite + Tailwind CSS**.
+A modern and intelligent **AI-powered Resume Screening Platform** developed using **React + Vite + Tailwind CSS**.  
+This project helps recruiters automate resume shortlisting by analyzing resumes, matching candidate skills with job descriptions, and ranking applicants using AI-generated scores.
 
-## Deploy
+---
 
-**Github Link** - https://github.com/2403A51L55/AI_resume_screening
+## 🌐 Live Server
+
+🔗 **Render Deployment:**  
+https://ai-resume-screening-61ib.onrender.com/
+
+---
+
+## 📂 GitHub Repository
+
+🔗 **Source Code:**  
+https://github.com/2403A51L55/AI_resume_screening
+
+---
+
+## 📝 Description
+
+The **AI Resume Screener** reduces manual recruitment effort by automatically screening resumes.
+
+The platform allows users to:
+
+- Upload resumes or paste resume text  
+- Enter job descriptions and required skills  
+- Automatically extract candidate skills  
+- Compare resumes with job requirements  
+- Generate match percentages  
+- Rank candidates from best to lowest match  
+- Visualize hiring analytics using charts  
+
+This project demonstrates the practical use of **Artificial Intelligence in Recruitment Automation**.
+
+---
 
 ## ✨ Features
 
-- 🔐 **Authentication** — Login/Signup with demo credentials
-- 📊 **Dashboard** — Real-time stats, activity chart, top candidates
-- 📤 **Resume Upload** — Drag & drop or paste resume text; AI extracts skills automatically
-- 📋 **Job Description** — Define requirements with pre-built templates; live skill preview
-- 🤖 **AI Screening** — NLP-powered skill matching & candidate ranking with match scores
-- 👥 **Candidates Panel** — Search, filter, compare candidates side-by-side
-- 📈 **Score Visualization** — Ring charts, bar charts, skill badge breakdown
-- 💾 **Persistent Storage** — All data saved in browser localStorage
+- 🔐 Authentication System (Login / Signup)  
+- 📊 Dashboard with statistics and charts  
+- 📤 Resume Upload / Paste Resume Text  
+- 📋 Job Description Input  
+- 🤖 AI Skill Extraction & Matching  
+- 📈 Candidate Match Score Visualization  
+- 👥 Candidate Search / Filter / Compare  
+- 💾 Persistent Data using localStorage  
+- 🎨 Responsive UI with Tailwind CSS  
+- ☁️ Live Deployment on Render  
 
-## 🚀 Quick Start
+---
 
-### Prerequisites
+## ⚙️ Prerequisites
 
-- **Node.js** v18 or higher — https://nodejs.org
-- **npm** (bundled with Node.js)
-- **Docker** — https://www.docker.com/get-started
+Before running the project, install:
 
-### Run the App Locally
+- **Node.js** (v18 or above)  
+- **npm**  
+- **Git**  
+- **Docker Desktop** (optional)  
+- **VS Code** or any editor  
 
-```bash
-# 1. Open this folder in VS Code
-# 2. Open the integrated terminal (Ctrl + ` )
-# 3. Install dependencies
-npm install
+Downloads:
 
-# 4. Start the development server
-npm run dev
+- Node.js → https://nodejs.org  
+- Docker → https://www.docker.com/products/docker-desktop/  
+- Git → https://git-scm.com/
 
-# 5. Open browser at http://localhost:5173
-```
-
-### Run the App in Docker
-
-```bash
-# Build the Docker image from the repo root
-docker build -t ai-resume-screener .
-
-# Run the container on port 80
-docker run --rm -p 80:80 ai-resume-screener
-```
-
-Then open `http://localhost` in your browser.
+---
 
 ## 🧠 How the AI Works
 
-The AI engine uses **NLP keyword extraction** to:
+The AI engine uses **Natural Language Processing (NLP)** for resume screening.
 
-1. **Parse** resume text → extract recognized technologies & skills
-2. **Match** candidate skills against job description requirements
-3. **Score** each candidate: `(matched / required) × 100` + bonus for extra skills
-4. **Rank** all candidates by score (highest first)
+### Process:
 
-## 🗂️ Project Structure
+1. Resume text is uploaded or pasted  
+2. Skills are extracted from resume  
+3. Job description required skills are collected  
+4. Candidate skills are matched with requirements  
+5. Match score calculated using:
 
-```
-ai-resume-screener/
+```text
+(Matched Skills / Required Skills) × 100
+
+---
+###Project Structure:
+
+AI_resume_screening/
 ├── src/
-│   ├── components/         # Reusable UI components
-│   │   ├── Layout.jsx      # Sidebar + topbar shell
-│   │   ├── ScoreRing.jsx   # Animated circular score gauge
-│   │   └── SkillBadge.jsx  # Colorful skill tag
+│   ├── components/
+│   │   ├── Layout.jsx
+│   │   ├── ScoreRing.jsx
+│   │   └── SkillBadge.jsx
 │   ├── context/
-│   │   └── AppContext.jsx  # Global state (auth, resumes, JD, results)
+│   │   └── AppContext.jsx
 │   ├── pages/
-│   │   ├── Login.jsx       # Split-screen auth page
-│   │   ├── Dashboard.jsx   # Stats + charts overview
-│   │   ├── Upload.jsx      # Drag & drop resume upload
-│   │   ├── JobDescription.jsx # JD editor with templates
-│   │   ├── Results.jsx     # AI-ranked results + export CSV
-│   │   └── Candidates.jsx  # Browse & compare candidates
+│   │   ├── Login.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── Upload.jsx
+│   │   ├── JobDescription.jsx
+│   │   ├── Results.jsx
+│   │   └── Candidates.jsx
 │   ├── utils/
-│   │   ├── aiEngine.js     # NLP skill extraction & ranking
-│   │   └── storage.js      # localStorage persistence + demo seeder
-│   ├── App.jsx             # Router setup
-│   ├── index.css           # Tailwind + custom design system
-│   └── main.jsx            # Entry point
-├── index.html
+│   │   ├── aiEngine.js
+│   │   └── storage.js
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── public/
+├── Dockerfile
+├── package.json
 ├── vite.config.js
 ├── tailwind.config.js
-└── package.json
-```
+└── README.md
 
-## 🎯 Tech Stack
-
-| Layer      | Technology               |
-| ---------- | ------------------------ |
-| Frontend   | React 18, React Router 6 |
-| Build Tool | Vite 5                   |
-| Styling    | Tailwind CSS 3           |
-| Charts     | Recharts                 |
-| Icons      | Lucide React             |
-| Storage    | Browser localStorage     |
-
-## 📦 Build for Production
-
-```bash
-npm run build
-# Output in dist/ folder — deploy to any static host
-```
+| Category         | Technology              |
+| ---------------- | ----------------------- |
+| Frontend         | React 18                |
+| Routing          | React Router DOM        |
+| Build Tool       | Vite                    |
+| Styling          | Tailwind CSS            |
+| Charts           | Recharts                |
+| Icons            | Lucide React            |
+| Storage          | Browser localStorage    |
+| AI Logic         | JavaScript NLP Matching |
+| Deployment       | Render                  |
+| Containerization | Docker                  |
+| Version Control  | Git + GitHub            |
