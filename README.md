@@ -35,7 +35,6 @@ A modern **AI-powered resume screening platform** built with **React**, **Vite**
 - Lucide React
 - Express
 - MongoDB / Mongoose
-- localStorage for client state
 
 ---
 
