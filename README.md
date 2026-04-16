@@ -1,7 +1,9 @@
 ﻿# 🤖 AI Resume Screener
 
 A modern, AI-powered resume screening platform built with **React + Vite + Tailwind CSS**.
+
 ## Deploy
+
 **Github Link** - https://github.com/2403A51L55/AI_resume_screening
 
 ## ✨ Features
@@ -18,10 +20,12 @@ A modern, AI-powered resume screening platform built with **React + Vite + Tailw
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - **Node.js** v18 or higher — https://nodejs.org
 - **npm** (bundled with Node.js)
+- **Docker** — https://www.docker.com/get-started
 
-### Run the App
+### Run the App Locally
 
 ```bash
 # 1. Open this folder in VS Code
@@ -34,6 +38,18 @@ npm run dev
 
 # 5. Open browser at http://localhost:5173
 ```
+
+### Run the App in Docker
+
+```bash
+# Build the Docker image from the repo root
+docker build -t ai-resume-screener .
+
+# Run the container on port 80
+docker run --rm -p 80:80 ai-resume-screener
+```
+
+Then open `http://localhost` in your browser.
 
 ## 🧠 How the AI Works
 
@@ -76,14 +92,14 @@ ai-resume-screener/
 
 ## 🎯 Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18, React Router 6 |
-| Build Tool | Vite 5 |
-| Styling | Tailwind CSS 3 |
-| Charts | Recharts |
-| Icons | Lucide React |
-| Storage | Browser localStorage |
+| Layer      | Technology               |
+| ---------- | ------------------------ |
+| Frontend   | React 18, React Router 6 |
+| Build Tool | Vite 5                   |
+| Styling    | Tailwind CSS 3           |
+| Charts     | Recharts                 |
+| Icons      | Lucide React             |
+| Storage    | Browser localStorage     |
 
 ## 📦 Build for Production
 
