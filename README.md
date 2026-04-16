@@ -68,6 +68,12 @@ ai-resume-screener/
 ├── postcss.config.js
 ├── tailwind.config.js
 ├── vite.config.js
+├── server/
+│   ├── index.js
+│   ├── models/
+│   │   └── Candidate.js
+│   └── routes/
+│       └── candidates.js
 └── README.md
 
 ```
