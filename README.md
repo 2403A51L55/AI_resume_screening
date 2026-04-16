@@ -26,7 +26,20 @@ A modern **AI-powered resume screening platform** built with **React**, **Vite**
 - React Router DOM
 - Recharts
 - Lucide React
-- localStorage for persistence
+- Express
+- MongoDB / Mongoose
+- localStorage for client state
+
+---
+
+## 🧩 Backend & MongoDB
+
+A new backend is available under `server/` using Express and Mongoose.
+
+- MongoDB connection string is configured with `MONGO_URI`
+- Run backend: `npm run server`
+- Health check: `GET /api/health`
+- Candidate data can be stored and retrieved via `/api/candidates`
 
 ---
 
@@ -70,14 +83,20 @@ ai-resume-screener/
 - Node.js v18 or newer
 - npm
 - Git
+- MongoDB server or MongoDB Atlas cluster
 
 ---
 
-## 📌 Notes
+## 🧪 Run Locally
 
-- The app is currently designed as a frontend project with client-side state.
-- Data is stored in `localStorage` for persistence across refreshes.
-- The AI matching logic is implemented in `src/utils/aiEngine.js`.
+```bash
+npm install
+cp server/.env.example .env
+npm run dev
+npm run server
+```
+
+Then open the local URL shown in the terminal for the frontend, and use `http://localhost:5000/api/health` to verify the backend.
 
 ---
 
